@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      //정의 부분
+      class ClassComponent extends React.Component {
+        //React.Component를 상속받으면 항상 render를 정의해줘야한다.
+        //render 메서드의 경우 안에서 항상 리턴이 있어야한다.  리턴되는 영역이 react.element이어야 한다.
+        render() {
+          return <div>Hello</div>;
+        }
+      }
+
+      // 사용부분
+      ReactDOM.render(<ClassComponent />, document.querySelector("#root"));
+    </script>
+  </body>
+</html>

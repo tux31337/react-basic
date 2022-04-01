@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      //rerender 조건
+      //props가 변경되거나 state가 변경되어야한다.
+
+      //클래스 컴포넌트에서 state는 항상 객체형태여야 한다.
+      //react state 를 가지는 객체를 변경할때는 약속이있다.
+      //직접 property안에있는 값을 변경한다고해서 render함수에서 반영되는 것이 아니다. 물론 직접 호출하면 되겠지만, react에서는 직접호출이아닌 변경 시 자동호출을 한다.
+      //그럴 경우 this.setState를 사용해서 한다.
+      class Component extends React.Component {
+        //방법 1
+        // state = {
+        //   count: 0,
+        // };
+
+        //방법2
+        constructor(props) {
+          super(props);
+
+          this.state = { count: 0 };
+        }
+
+        render() {
+          return (
+            <div>
+              <h1>{this.props.message} 이것이 클래스로 만든 컴포넌트 입니다.</h1>
+              <p>{this.state.count}</p>
+            </div>
+          );
+        }
+        componentDidMount() {
+          setTimeout(() => {
+            // tihs.state.count = this.state.count + 1; 잘못된 방식 직접 property안에있는 값을 변경한다고해서 render함수에서 반영되는 것이 아니다. 물론 직접 호출하면 되겠지만, react에서는 직접호출이아닌 변경 시 자동호출을 한다.
+            //방법 1. this.setState 이용  객체를 새로 만드는 방식
+            // this.setState({
+            //   count: this.state.count + 1,
+            // });
+
+            //방법2. 앞에값을 이용해서 하는 방식
+            this.setState((previousState) => {
+              const newState = { count: previousState.count + 1 };
+              return newState;
+            });
+          }, 1000);
+        }
+      }
+
+      //props 기본값 지정방법 1 - 함수 클래스 둘다 가능
+      Component.defaultProps = {
+        message: "기본값",
+      };
+
+      ReactDOM.render(<Component message="안녕하세요!!" />, document.querySelector("#root"));
+    </script>
+  </body>
+</html>
