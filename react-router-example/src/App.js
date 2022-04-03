@@ -4,9 +4,13 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import Links from "./Components/Links";
+import NavLinks from "./Components/NavLink copy";
 function App() {
   return (
     <BrowserRouter>
+      <Links />
+      <NavLinks />
       <Routes>
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />}></Route>
