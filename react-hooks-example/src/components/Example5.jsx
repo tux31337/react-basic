@@ -20,7 +20,7 @@ const Example5 = () => {
     console.log("componentDidMount & componentDidUpdate by Count", count);
 
     return () => {
-      //cleanup
+      //cleanup 이전 defendency값으로 실행
       console.log("cleanup by count", count);
     };
   }, [count]);
